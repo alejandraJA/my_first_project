@@ -24,7 +24,6 @@ export default {
                 { mensaje: 'Tarea 6', complete: false },
                 { mensaje: 'Tarea 7', complete: false },
                 { mensaje: 'Tarea 8', complete: false },
-                { h: 'Tarea 9', f: true },
             ]
         }
     },
