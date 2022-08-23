@@ -2,19 +2,22 @@
   <div id="app">
     <ButtonCountVue message="Count"/>
     <ButtonCountWithMethodVue message="Second count"/>
+    <InputMessageVue />
   </div>
 </template>
 
 <script>
 import ButtonCountVue from './components/ButtonCount.vue'
 import ButtonCountWithMethodVue from './components/ButtonCountWithMethod.vue';
+import InputMessageVue from './components/InputMessage.vue';
 
 export default {
   name: 'App',
   components: {
-    ButtonCountVue, 
+    ButtonCountVue,
     ButtonCountWithMethodVue,
-  }
+    InputMessageVue,
+}
 }
 </script>
 

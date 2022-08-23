@@ -33,4 +33,8 @@ export default {
   font-size: 16px;
   border-radius: 16px;
 }
+
+.button:hover {
+  background-color: #6e89a4;
+}
 </style>
