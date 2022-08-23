@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <InputMessageConditionsVue />
+    <!--InputMessageConditionsVue /-->
+    <h1>Title</h1>
+    <LoopComponent />
   </div>
 </template>
 
 <script>
-import InputMessageConditionsVue from './components/structure/InputMessageConditions.vue';
+import LoopComponent from './components/structure/LoopComponent.vue';
+//import InputMessageConditionsVue from './components/structure/InputMessageConditions.vue';
 
 export default {
   name: 'App',
   components: {
-    InputMessageConditionsVue
+    LoopComponent,
 }
 }
 </script>
