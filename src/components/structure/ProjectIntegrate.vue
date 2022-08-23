@@ -1,17 +1,25 @@
 <template lang="en">
 <div id="app">
-    <h1>Lista de tareas</h1>
-    <p v-for="(item, index) in task">
-        <span v-text="item.message" />
-        <small class="identificator" v-if="item.complete" v-text="' Completa'" />
-        <small class="identificator" v-else v-text="' Incompleta'" />
-    </p>
-    <h2>Nueva tarea</h2>
-    <input v-model="newTask" type="text" class="input" placeholder="Tarea">
-    <button class="floatinButton" @click="addTask">+</button>
-    <br>
-    <small class="error" v-text="error" v-if="((newTask.length >= 1) && (newTask.length < 5))"></small>
-    </input>
+    <section>
+        <h1>Lista de tareas</h1>
+        <p v-for="(item, index) in task">
+            <span v-text="item.message" />
+            <input class="checkbox" @click="item.complete = false" type="checkbox" checked v-if="item.complete" />
+            <input class="checkbox" @click="item.complete = true" type="checkbox" v-else />
+        </p>
+        <br>
+        <p>Nueva tarea</p>
+        <input v-model="newTask" type="text" class="input" placeholder="Tarea">
+        <button class="floatinButton" @click="addTask">+</button>
+        <br>
+        <small class="error" v-text="error" v-if="((newTask.length >= 1) && (newTask.length < 5))"></small>
+        </input>
+    </section>
+    <section>
+        <pre>
+        {{$data}}
+        </pre>
+    </section>
 </div>
 </template>
 
@@ -38,22 +46,6 @@ export default {
                     message: 'Tarea 4',
                     complete: true
                 },
-                {
-                    message: 'Tarea 5',
-                    complete: true
-                },
-                {
-                    message: 'Tarea 6',
-                    complete: false
-                },
-                {
-                    message: 'Tarea 7',
-                    complete: false
-                },
-                {
-                    message: 'Tarea 8',
-                    complete: false
-                },
             ]
         }
     },
@@ -66,10 +58,9 @@ export default {
                 })
                 this.newTask = ''
             } else {
-                if(!this.newTask) {
+                if (!this.newTask) {
                     this.error = 'El campo esta vacio'
-                }
-                else this.error = 'Debe ser mayor de 5 carácteres'
+                } else this.error = 'Debe ser mayor de 5 carácteres'
             }
         }
     }
@@ -96,6 +87,10 @@ export default {
     color: white
 }
 
+.checkbox {
+    cursor: pointer;
+}
+
 .floatinButton {
     background-color: #355575;
     border: none;
@@ -111,13 +106,28 @@ export default {
 
 .floatinButton:hover {
     background-color: #6e89a4;
+    cursor: pointer;
 }
-
 
 .error {
     margin-top: 4px;
     color: rgb(197, 24, 24);
     font-size: 10px;
     align-items: flex-end;
+}
+
+#app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#app>section {
+    width: 50%;
+}
+
+#app>section>pre {
+    background-color: #0b0c0ca1;
+    border-radius: 16px;
 }
 </style>

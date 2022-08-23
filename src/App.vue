@@ -30,10 +30,7 @@ export default {
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 2%;
+    width: 96%;
     margin-bottom: 2%;
-}
-
-body {
-    margin-bottom: 200px;
 }
 </style>
