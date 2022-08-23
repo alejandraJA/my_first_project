@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <HelloWorld message="Welcome to Your Vue.js App"/>
+    <ButtonCountVue message="Count"/>
+    <ButtonCountWithMethodVue message="Second count"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/ButtonCount.vue'
+import ButtonCountVue from './components/ButtonCount.vue'
+import ButtonCountWithMethodVue from './components/ButtonCountWithMethod.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ButtonCountVue, 
+    ButtonCountWithMethodVue,
   }
 }
 </script>
