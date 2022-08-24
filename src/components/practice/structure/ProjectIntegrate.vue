@@ -4,9 +4,11 @@
         <h1>Lista de tareas</h1>
         <p v-if="completeTask" v-text="'Tareas completadas ' + completeTask" />
         <p v-if="inCompleteTask" v-text="'Tareas incompletas ' + inCompleteTask" />
+        <!-- Start Items -->
         <p @click="marckTask(item)" v-for="(item, index) in tasks" :class="taskClass(item.complete)">
-            <span v-text="item.message" />
+            <span v-text="item.message" @click="remove()" />
         </p>
+        <!-- End Items -->
         <br>
         <p>Nueva tarea</p>
         <input v-model="newTask" type="text" class="input" placeholder="Tarea">
@@ -66,6 +68,10 @@ export default {
         },
         marckTask: function (item) {
             return item.complete = !item.complete
+        },
+        remove: function() {
+            var task2 = this.tasks
+            task2.splice(this.tasks.indexOf(this.task), 1)
         },
     },
     computed: {

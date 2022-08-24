@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProjectIntegrate from './components/structure/ProjectIntegrate.vue';
+import ProjectIntegrate from './components/practice/structure/ProjectIntegrate.vue';
 //import LoopComponent from './components/structure/LoopComponent.vue';
 //import InputMessageConditionsVue from './components/structure/InputMessageConditions.vue';
 //import MethodsExample from './components/structure/MethodsExample.vue';
