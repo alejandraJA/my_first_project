@@ -3,11 +3,9 @@
     <section>
         <h1>Lista de tareas</h1>
         <p v-if="completeTask" v-text="'Tareas completadas ' + completeTask" />
-        <p v-if="inCompleteTask"v-text="'Tareas incompletas ' + inCompleteTask" />
-        <p class="card" v-for="(item, index) in tasks">
+        <p v-if="inCompleteTask" v-text="'Tareas incompletas ' + inCompleteTask" />
+        <p @click="marckTask(item)" v-for="(item, index) in tasks" :class="taskClass(item.complete)">
             <span v-text="item.message" />
-            <input class="checkbox" @click="item.complete = false" type="checkbox" checked v-if="item.complete" />
-            <input class="checkbox" @click="item.complete = true" type="checkbox" v-else />
         </p>
         <br>
         <p>Nueva tarea</p>
@@ -32,51 +30,57 @@ export default {
             error: "Debe ser mayor de 5 carácteres",
             newTask: "",
             tasks: [{
-                    message: 'Tarea 1',
-                    complete: false
+                    message: "Tarea 1",
+                    complete: false,
                 },
                 {
-                    message: 'Tarea 2',
-                    complete: true
+                    message: "Tarea 2",
+                    complete: true,
                 },
                 {
-                    message: 'Tarea 3',
-                    complete: false
+                    message: "Tarea 3",
+                    complete: false,
                 },
                 {
-                    message: 'Tarea 4',
-                    complete: true
+                    message: "Tarea 4",
+                    complete: true,
                 },
-            ]
-        }
+            ],
+        };
     },
     methods: {
         addTask: function () {
             if (this.newTask.length > 5) {
                 this.tasks.push({
                     message: this.newTask,
-                    complete: false
-                })
-                this.newTask = ''
+                    complete: false,
+                });
+                this.newTask = "";
             } else {
-                if (!this.newTask) this.error = 'El campo esta vacio'
-                else this.error = 'Debe ser mayor de 5 carácteres'
+                if (!this.newTask) this.error = "El campo esta vacio";
+                else this.error = "Debe ser mayor de 5 carácteres";
             }
-        }
+        },
+        taskClass: function (status) {
+            return ['card', status ? 'checked' : 'unchecked']
+        },
+        marckTask: function (item) {
+            return item.complete = !item.complete
+        },
     },
     computed: {
         completeTask: function () {
             return this.tasks.filter(function (task) {
-                return task.complete
-            }).length
+                return task.complete;
+            }).length;
         },
         inCompleteTask: function () {
             return this.tasks.filter(function (task) {
-                return !task.complete
-            }).length
-        }
+                return !task.complete;
+            }).length;
+        },
     },
-}
+};
 </script>
 
 <style>
@@ -96,7 +100,7 @@ export default {
 }
 
 .input::placeholder {
-    color: white
+    color: white;
 }
 
 .checkbox {
@@ -122,7 +126,6 @@ export default {
 }
 
 .card {
-    background-color: #355575;
     border-radius: 16px;
     padding-top: 8px;
     margin-top: 4px;
@@ -130,6 +133,14 @@ export default {
     padding-bottom: 8px;
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.card.checked {
+    background-color: #19772d85;
+}
+
+.card.unchecked {
+    background-color: #00000094;
 }
 
 .error {
