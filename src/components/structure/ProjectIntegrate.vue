@@ -2,7 +2,9 @@
 <div id="app">
     <section>
         <h1>Lista de tareas</h1>
-        <p v-for="(item, index) in task">
+        <p v-if="completeTask" v-text="'Tareas completadas ' + completeTask" />
+        <p v-if="inCompleteTask"v-text="'Tareas incompletas ' + inCompleteTask" />
+        <p class="card" v-for="(item, index) in tasks">
             <span v-text="item.message" />
             <input class="checkbox" @click="item.complete = false" type="checkbox" checked v-if="item.complete" />
             <input class="checkbox" @click="item.complete = true" type="checkbox" v-else />
@@ -25,12 +27,11 @@
 
 <script>
 export default {
-    el: '#app',
     data: function () {
         return {
             error: "Debe ser mayor de 5 carácteres",
             newTask: "",
-            task: [{
+            tasks: [{
                     message: 'Tarea 1',
                     complete: false
                 },
@@ -52,18 +53,29 @@ export default {
     methods: {
         addTask: function () {
             if (this.newTask.length > 5) {
-                this.task.push({
+                this.tasks.push({
                     message: this.newTask,
                     complete: false
                 })
                 this.newTask = ''
             } else {
-                if (!this.newTask) {
-                    this.error = 'El campo esta vacio'
-                } else this.error = 'Debe ser mayor de 5 carácteres'
+                if (!this.newTask) this.error = 'El campo esta vacio'
+                else this.error = 'Debe ser mayor de 5 carácteres'
             }
         }
-    }
+    },
+    computed: {
+        completeTask: function () {
+            return this.tasks.filter(function (task) {
+                return task.complete
+            }).length
+        },
+        inCompleteTask: function () {
+            return this.tasks.filter(function (task) {
+                return !task.complete
+            }).length
+        }
+    },
 }
 </script>
 
@@ -109,9 +121,20 @@ export default {
     cursor: pointer;
 }
 
+.card {
+    background-color: #355575;
+    border-radius: 16px;
+    padding-top: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
 .error {
     margin-top: 4px;
-    color: rgb(197, 24, 24);
+    color: #c51818;
     font-size: 10px;
     align-items: flex-end;
 }
@@ -123,11 +146,16 @@ export default {
 }
 
 #app>section {
-    width: 50%;
+    width: 48%;
+    padding: 1%;
 }
 
 #app>section>pre {
     background-color: #0b0c0ca1;
     border-radius: 16px;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-bottom: 16px;
+    padding-right: 16px;
 }
 </style>
